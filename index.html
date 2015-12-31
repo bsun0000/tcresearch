@@ -25,21 +25,18 @@
 	<div id="combination_box"><div id="left"></div><span class="operator">+</span><div id="right"></div><span class="operator">=</span><div id="equals"></div></div>
 	<table>
 		<tr>
-			<td>From - To:</td>
-			<td colspan="2"><input type=hidden id="fromSel"></input> - <input type=hidden id="toSel"></input> | <input id="close_results" type="button" value="Close all results" /></td>
+			<td width="280px" rowspan="4"><ul class="fast" id="fastFrom"></ul></td>
+			<td><input type=hidden id="fromSel"></input> - <input type=hidden id="toSel"></input> | <input id="close_results" type="button" value="Close all results" /></td>
+			<td width="280px" rowspan="4"><ul class="fast" id="fastTo"></ul></td>
 		</tr>
 		<tr>
-			<td>Min. Steps:</td>
-			<td colspan="2"><input id="spinner" name="value" value="1" style="width:140px" /> | <input id="find_connection" type="button" value="Find Connection" /></td>
+			<td colspan="1"><input id="spinner" name="value" value="1" style="width:140px" /> | <input id="find_connection" type="button" value="Find Connection" /></td>
 		</tr>
 		<tr>
-			<td width="220px"><ul class="fast" id="fastFrom"></ul></td>
 			<td align="center" width="1000px"><ul id="avail" class="aspectlist"></ul></td>
-			<td width="220px"><ul class="fast" id="fastTo"></ul></td>
 		</tr>
 		<tr>
-			<td>Addons:</td>
-			<td id="addons" colspan="2"> | <input type="button" id="sel_all" value="Select All Aspects"><input type="button" id="desel_all" value="Deselect All Aspects"></td>
+			<td id="addons"> | <input type="button" id="sel_all" value="Select All Aspects"><input type="button" id="desel_all" value="Deselect All Aspects"></td>
 		</tr> 
 	</table>
 </body>

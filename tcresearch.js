@@ -1,3 +1,11 @@
+	function onfast_from_click(aspect) {
+		$("#fromSel").select2("val", aspect);
+	}
+	
+	function onfast_to_click(aspect) {
+		$("#toSel").select2("val", aspect);
+	}
+
 $(function(){
 	var latest_version = "4.2.2.0";
 	$.each(version_dictionary, function(key,version){
@@ -160,7 +168,7 @@ $(function(){
 	$("#close_results").click(function(){
 		$(".result").dialog("close");
 	});
-	
+
 	function reset_aspects() {
 		aspects = $.extend([], version_dictionary[version]["base_aspects"]);
 		combinations = $.extend(true, {}, version_dictionary[version]["combinations"]);
@@ -174,8 +182,21 @@ $(function(){
 		tier_aspects = tier_aspects.sort(aspectSort);
 		aspects = aspects.concat(tier_aspects);
 		push_addons(aspects, combinations);
+		var index = 0;
 		aspects.forEach(function(aspect) {
 			$('#avail').append('<li class="aspect" id="'+aspect+'"><img src="aspects/color/' + translate[aspect] + '.png" /><div>' + formatAspectName(translate[aspect]) + '</div><div class="desc">' + aspect + '</div></li>');
+			
+			$("#fastFrom").append('<li><img src="aspects/color/' + translate[aspect] + '.png" width="24px" height="24px" /> ' +
+									'<a href="#" onclick=\'onfast_from_click("' + aspect + '");\'>' + translate[aspect] + '</a></li>');
+									
+			$("#fastTo").append('<li><img src="aspects/color/' + translate[aspect] + '.png" width="24px" height="24px" /> ' +
+									'<a href="#" onclick=\'onfast_to_click("' + aspect + '");\'>' + translate[aspect] + '</a></li>');
+			
+			index++;
+			if (index == 35) {
+				$("#fastFrom").append('<br />');
+				$("#fastTo").append('<br />');
+			}
 		});
 		toggle_addons(addon_aspects);
 		var ddData = [];
@@ -186,13 +207,13 @@ $(function(){
 		ddData.sort(ddDataSort);
 		function format(d) {
 			var aspect = d.id;
-			return '<div class="aspect" id="'+aspect+'"><img style="margin: 4px 5px 0 0" src="aspects/color/' + translate[aspect] + '.png" /><div>' + formatAspectName(translate[aspect]) + '</div><div class="desc">' + aspect + '</div></div>'
+			return '<div class="aspect" id="'+aspect+'"><img style="float:left;height:16px;" src="aspects/color/' + translate[aspect] + '.png" />' + formatAspectName(translate[aspect]) + ' (' + aspect + ')</div>'
 		}
 		$('#toSel,#fromSel').select2({
 			data: ddData,
 			formatResult: format,
 		    formatSelection: format,
-		    width: '200px',
+		    width: '300px',
 		    allowClear:false,
 		    sortResults: function(results, container, query) {
     			return results.sort(function(a, b) {
@@ -236,7 +257,7 @@ $(function(){
 				aspect_count[e]++;
 				step_count++;
 			}
-			$('#'+id).append('<li class="aspect_result aspect" id="' + e + '"><img src="aspects/color/' + translate[e] + '.png" /><div>' + formatAspectName(translate[e]) + '</div><div class="desc">' + e + '</div></li><li>↓</li>');
+			$('#'+id).append('<li class="aspect_result aspect" id="' + e + '"><img src="aspects/color/' + translate[e] + '.png" /><div>' + formatAspectName(translate[e]) + '</div><div class="desc">' + e + '<div class="desc" style="float:right;">↓↓↓</div></div></li>');
 		});
 		$('#'+id).children().last().remove();
 		$('#'+id).append('<li id="aspects_used">Aspects Used</li>');
